@@ -1,0 +1,404 @@
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Relatório de Erros</title>
+        
+<style>
+body { font-family: Arial, sans-serif; background: #f3f5f7; color: #1f2937; margin: 0; padding: 32px; }
+main { max-width: 1180px; margin: auto; }
+h1 { color: #111827; margin-bottom: 4px; }
+.subtitle { color: #4b5563; margin-bottom: 24px; }
+.card { background: white; border-radius: 14px; padding: 22px; margin-bottom: 24px; box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
+.card h2 { margin-top: 0; color: #1f3a5f; }
+.what { color: #4b5563; }
+.insight { background: #fff7d6; border-left: 5px solid #f2c94c; padding: 14px; border-radius: 8px; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { background: #eef2f7; text-align: left; padding: 8px; }
+.data-table td { border-bottom: 1px solid #e5e7eb; padding: 8px; vertical-align: top; }
+.audit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.metric { background: #eef6ff; padding: 12px; border-radius: 10px; }
+</style>
+
+    </head>
+    <body>
+        <main>
+            <h1>Relatório de Auditoria e Limpeza de Dados</h1>
+            <p class="subtitle">Resumo dos problemas encontrados, impacto analítico e tratamento realizado.</p>
+            <section class="card">
+                <h2>Resumo executivo</h2>
+                <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Indicador</th>
+      <th>Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Linhas originais</td>
+      <td>413</td>
+    </tr>
+    <tr>
+      <td>Oportunidades únicas originais</td>
+      <td>261</td>
+    </tr>
+    <tr>
+      <td>Linhas fora do escopo removidas</td>
+      <td>108</td>
+    </tr>
+    <tr>
+      <td>Linhas mantidas após filtro de escopo</td>
+      <td>305</td>
+    </tr>
+    <tr>
+      <td>Oportunidades únicas após filtro de escopo</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <td>Linhas com Stage corrigido</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Linhas com Lead_Office corrigido</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>Linhas com Lead_Source corrigido</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>Linhas com divergência de Amount</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>Oportunidades com divergência de Amount</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+            </section>
+            
+    <section class="card">
+        <h2>1. Registros fora do escopo</h2>
+        <p class="what"><strong>O que mostra:</strong> Linhas cujo Type não pertence aos três tipos solicitados no case.</p>
+        <div><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Opportunity_ID</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OPP-10008</td>
+      <td>Flex/Renewal</td>
+    </tr>
+    <tr>
+      <td>OPP-10008</td>
+      <td>Flex/Renewal</td>
+    </tr>
+    <tr>
+      <td>OPP-10008</td>
+      <td>Flex/Renewal</td>
+    </tr>
+    <tr>
+      <td>OPP-10008</td>
+      <td>Flex/Renewal</td>
+    </tr>
+    <tr>
+      <td>OPP-10009</td>
+      <td>Flex/Renewal</td>
+    </tr>
+    <tr>
+      <td>OPP-10015</td>
+      <td>Flex/Renewal</td>
+    </tr>
+    <tr>
+      <td>OPP-10021</td>
+      <td>Flex/Renewal</td>
+    </tr>
+    <tr>
+      <td>OPP-10021</td>
+      <td>Flex/Renewal</td>
+    </tr>
+    <tr>
+      <td>OPP-10021</td>
+      <td>Flex/Renewal</td>
+    </tr>
+    <tr>
+      <td>OPP-10022</td>
+      <td>Flex/Renewal</td>
+    </tr>
+  </tbody>
+</table></div>
+        <p class="insight"><strong>Insight executivo:</strong> A remoção evita misturar oportunidades de natureza diferente, como Retainer, Renewal ou Passthrough, com a análise de projetos e upsell.</p>
+    </section>
+    
+    <section class="card">
+        <h2>2. Correção de Stage</h2>
+        <p class="what"><strong>O que mostra:</strong> Erros de digitação que fragmentariam etapas do funil.</p>
+        <div><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Opportunity_ID</th>
+      <th>Stage_original</th>
+      <th>Stage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OPP-10031</td>
+      <td>Clossed Won</td>
+      <td>Closed Won</td>
+    </tr>
+    <tr>
+      <td>OPP-10054</td>
+      <td>Clossed Won</td>
+      <td>Closed Won</td>
+    </tr>
+    <tr>
+      <td>OPP-10115</td>
+      <td>Qualifyed</td>
+      <td>Qualified</td>
+    </tr>
+    <tr>
+      <td>OPP-10124</td>
+      <td>Pitchinng</td>
+      <td>Pitching</td>
+    </tr>
+    <tr>
+      <td>OPP-10159</td>
+      <td>Pithced</td>
+      <td>Pitched</td>
+    </tr>
+    <tr>
+      <td>OPP-10173</td>
+      <td>Pithced</td>
+      <td>Pitched</td>
+    </tr>
+    <tr>
+      <td>OPP-10175</td>
+      <td>Negociation</td>
+      <td>Negotiation</td>
+    </tr>
+    <tr>
+      <td>OPP-10218</td>
+      <td>Registrationn</td>
+      <td>Registration</td>
+    </tr>
+    <tr>
+      <td>OPP-10236</td>
+      <td>Pitchinng</td>
+      <td>Pitching</td>
+    </tr>
+  </tbody>
+</table></div>
+        <p class="insight"><strong>Insight executivo:</strong> Sem esta correção, estágios como Closed Won poderiam ser subcontados, afetando receita, win rate e funil.</p>
+    </section>
+    
+    <section class="card">
+        <h2>3. Correção de Lead Office</h2>
+        <p class="what"><strong>O que mostra:</strong> Variações de grafia de escritório, principalmente Sao Paulo.</p>
+        <div><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Opportunity_ID</th>
+      <th>Lead_Office_original</th>
+      <th>Lead_Office</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OPP-10002</td>
+      <td>São Paulo</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+    <tr>
+      <td>OPP-10031</td>
+      <td>SP</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+    <tr>
+      <td>OPP-10031</td>
+      <td>SAO PAULO</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+    <tr>
+      <td>OPP-10069</td>
+      <td>SP</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+    <tr>
+      <td>OPP-10121</td>
+      <td>São Paulo</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+    <tr>
+      <td>OPP-10129</td>
+      <td>sao paulo</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+    <tr>
+      <td>OPP-10130</td>
+      <td>São Paulo</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+    <tr>
+      <td>OPP-10141</td>
+      <td>São Paulo</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+    <tr>
+      <td>OPP-10153</td>
+      <td>SP</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+    <tr>
+      <td>OPP-10166</td>
+      <td>sao paulo</td>
+      <td>Sao Paulo, BR</td>
+    </tr>
+  </tbody>
+</table></div>
+        <p class="insight"><strong>Insight executivo:</strong> Sem padronização, o ciclo de venda por escritório ficaria fragmentado e prejudicaria comparação regional.</p>
+    </section>
+    
+    <section class="card">
+        <h2>4. Correção de Lead Source</h2>
+        <p class="what"><strong>O que mostra:</strong> Variações de maiúsculas, espaços, separadores e erros de digitação em fontes de lead.</p>
+        <div><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Opportunity_ID</th>
+      <th>Lead_Source_original</th>
+      <th>Lead_Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OPP-10020</td>
+      <td>inbound - current client (deprecated)</td>
+      <td>Inbound - Current Client (DEPRECATED)</td>
+    </tr>
+    <tr>
+      <td>OPP-10029</td>
+      <td>inbound - current client (deprecated)</td>
+      <td>Inbound - Current Client (DEPRECATED)</td>
+    </tr>
+    <tr>
+      <td>OPP-10039</td>
+      <td>Don't Know-Other</td>
+      <td>Don't Know/Other (DEPRECATED)</td>
+    </tr>
+    <tr>
+      <td>OPP-10050</td>
+      <td>REFERRAL - INTERNAL</td>
+      <td>Referral - Internal</td>
+    </tr>
+    <tr>
+      <td>OPP-10060</td>
+      <td>Don't Know-Other</td>
+      <td>Don't Know/Other (DEPRECATED)</td>
+    </tr>
+    <tr>
+      <td>OPP-10105</td>
+      <td>inbound - current client (deprecated)</td>
+      <td>Inbound - Current Client (DEPRECATED)</td>
+    </tr>
+    <tr>
+      <td>OPP-10110</td>
+      <td>inbound - current client (deprecated)</td>
+      <td>Inbound - Current Client (DEPRECATED)</td>
+    </tr>
+    <tr>
+      <td>OPP-10111</td>
+      <td>inbound - current client (deprecated)</td>
+      <td>Inbound - Current Client (DEPRECATED)</td>
+    </tr>
+    <tr>
+      <td>OPP-10172</td>
+      <td>Refferal - Internal</td>
+      <td>Referral - Internal</td>
+    </tr>
+    <tr>
+      <td>OPP-10181</td>
+      <td>inbound - current client (deprecated)</td>
+      <td>Inbound - Current Client (DEPRECATED)</td>
+    </tr>
+  </tbody>
+</table></div>
+        <p class="insight"><strong>Insight executivo:</strong> A padronização garante que a taxonomia de origem represente canais reais e não ruído de preenchimento.</p>
+    </section>
+    
+    <section class="card">
+        <h2>5. Divergência entre Amount e Total_Product_Amount</h2>
+        <p class="what"><strong>O que mostra:</strong> Oportunidades em que o valor do cabeçalho não bate com a soma dos produtos.</p>
+        <div><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Opportunity_ID</th>
+      <th>Amount_Original</th>
+      <th>Amount_Corrigido</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OPP-10030</td>
+      <td>R$ 290.400,00</td>
+      <td>R$ 645.420,00</td>
+    </tr>
+    <tr>
+      <td>OPP-10081</td>
+      <td>R$ 150.000,00</td>
+      <td>R$ 120.000,00</td>
+    </tr>
+    <tr>
+      <td>OPP-10089</td>
+      <td>R$ 728.000,00</td>
+      <td>R$ 520.000,00</td>
+    </tr>
+    <tr>
+      <td>OPP-10092</td>
+      <td>R$ 295.200,00</td>
+      <td>R$ 492.000,00</td>
+    </tr>
+    <tr>
+      <td>OPP-10097</td>
+      <td>R$ 1.974.000,00</td>
+      <td>R$ 1.410.000,00</td>
+    </tr>
+    <tr>
+      <td>OPP-10104</td>
+      <td>R$ 144,00</td>
+      <td>R$ 144.000,00</td>
+    </tr>
+    <tr>
+      <td>OPP-10111</td>
+      <td>R$ 67.500,00</td>
+      <td>R$ 90.000,00</td>
+    </tr>
+    <tr>
+      <td>OPP-10126</td>
+      <td>R$ 375.000,00</td>
+      <td>R$ 300.000,00</td>
+    </tr>
+    <tr>
+      <td>OPP-10151</td>
+      <td>R$ 1.000,00</td>
+      <td>R$ 420,00</td>
+    </tr>
+    <tr>
+      <td>OPP-10174</td>
+      <td>R$ 88,00</td>
+      <td>R$ 88.000,00</td>
+    </tr>
+  </tbody>
+</table></div>
+        <p class="insight"><strong>Insight executivo:</strong> Como a fonte da verdade é a soma dos produtos, Amount foi recalculado para evitar distorção de receita e pipeline.</p>
+    </section>
+    
+        </main>
+    </body>
+    </html>
+    
