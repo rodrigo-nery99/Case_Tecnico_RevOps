@@ -24,7 +24,7 @@ Com os dados limpos, foram gerados indicadores de performance (KPIs) para o ano 
 
 ## 🚀 Entregas Realizadas
 
-1.  **Notebook de Processamento (`Case_TEC_New_revisado.ipynb`):** Script completo com toda a lógica de ETL (Extração, Transformação e Carga).
+1.  **Notebook de Processamento (`Case_TEC_RevOps.ipynb`):** Script completo com toda a lógica de ETL (Extração, Transformação e Carga).
 2.  **Base de Dados Corrigida (`opps_corrigido.xlsx`):** Arquivo final saneado com 203 oportunidades únicas e 305 linhas de produtos.
 3.  **Relatório de Auditoria (`relatorio_erros.html`):** Documento técnico listando todas as correções efetuadas (Stage, Office, Source e Amount).
 4.  **Dashboard Executivo (`analise.html`):** Relatório visual com os principais insights de negócio.
@@ -47,6 +47,3 @@ Para evitar o reaparecimento dos problemas de dados encontrados, recomenda-se:
 1.  **Validação de CRM:** Implementar campos de seleção (dropdown) em vez de texto livre para *Stage*, *Lead Office* e *Lead Source*.
 2.  **Automação de Cálculos:** Travar o campo *Amount* para ser sempre a soma automática dos produtos vinculados.
 3.  **Governança:** Estabelecer uma rotina semanal de limpeza de "Aging" para oportunidades estagnadas nos estágios de *Pitched* e *Negotiation*.
-
----
-*Projeto desenvolvido como parte do processo de avaliação técnica para Operations.*
